@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.IpMapper">
+    <resultMap id="BaseResultMap" type="entity.IP">
+        <id column="ip" jdbcType="VARCHAR" property="ip" />
+        <result column="port" jdbcType="VARCHAR" property="port" />
+        <result column="http" jdbcType="VARCHAR" property="http" typeHandler="config.ExampleTypeHandler"/>
+    </resultMap>
+    <sql id="userColumns"> ip,port,http </sql>
+    <select id="selectOne" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="userColumns" ></include>
+        from proxyip where ip=#{ip}
+    </select>
+    <insert id="insertIpList" parameterType="java.util.List">
+
+          insert into proxyip(
+          ip,
+          port,
+          http
+          ) values
+        <foreach collection="list" item="p" open="(" separator="," close=") ">(
+          #{p.ip},
+          #{p.port},
+          #{p.http}
+          )
+      </foreach>
+        ON DUPLICATE KEY UPDATE
+        port=#{p.port},http=#{p.http}
+    </insert>
+    <insert id="insertIp" parameterType="entity.IP">
+
+        insert into proxyip(
+        ip,
+        port,
+        http
+        ) values(
+            #{p.ip},
+            #{p.port},
+            #{p.http}
+            )
+        ON DUPLICATE KEY UPDATE
+        port=#{p.port},http=#{p.http}
+    </insert>
+    <update id="update" parameterType="entity.IP">
+        update proxyip
+        <set>
+            <if test="p.ip != null">ip=#{p.ip} ,</if>
+            <if test="p.port != null">port=#{p.port} ,</if>
+            <if test="p.http != null">http=#{p.http}</if>
+        </set>
+        where ip=#{p.ip}
+    </update>
+</mapper>

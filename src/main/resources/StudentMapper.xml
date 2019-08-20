@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.StudentMapper">
+    <!-- 映射学生对象的resultMap-->
+    <resultMap id="studentResultMap" type="entity.Student">
+        <id property="id" column="id" />
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <!-- 关联映射-->
+        <association property="clazz" column="clazz_id"
+                     javaType="entity.Clazz"
+                     select="selectClazzWithId"/>
+    </resultMap>
+    <!--根据班级id查询班级-->
+    <select id="selectClazzWithId" resultType="entity.Clazz">
+      SELECT * FROM TB_CLAZZ where id = #{id}
+    </select>
+    <!-- 查询所有学生信息-->
+    <select id="selectStudent" resultMap="studentResultMap" >
+      SELECT * FROM TB_STUDENT
+    </select>
+
+<!--一对多-->
+    <!-- 根据id查询班级信息，返回resultMap -->
+    <select id="selectClazzById" parameterType="int"
+            resultMap="clazzResultMap">
+        SELECT * FROM tb_clazz WHERE id = #{id}
+    </select>
+    <!-- 映射Clazz对象的resultMap -->
+    <resultMap type="entity.Clazz"
+               id="clazzResultMap">
+        <id property="id" column="id" />
+        <result property="code" column="code" />
+        <result property="name" column="name" />
+        <!-- 一对多关联映射:collection fetchType="lazy"表示懒加载 -->
+        <collection property="students" javaType="ArrayList"
+                    column="id" ofType="entity.Student"
+                    select="selectStudentById"
+                    fetchType="lazy">
+            <id property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="sex" column="sex" />
+            <result property="age" column="age" />
+        </collection>
+    </resultMap>
+    <!-- 根据id查询学生信息，多表连接，返回resultMap -->
+    <select id="selectStudentById" parameterType="int"
+    resultMap="studentMap">
+         SELECT * FROM tb_student s,tb_clazz c
+        WHERE c.id = s.clazz_id
+        AND c.id = #{id}
+    </select>
+    <resultMap id="studentMap" type="entity.Student">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="sex" column="sex" />
+        <result property="age" column="age" />
+        <!-- 多对一关联映射:association -->
+        <association property="clazz"
+                     javaType="entity.Clazz"
+                     column="clazz_id"
+                     select="selectClazzWithId">
+            <id property="id" column="id" />
+            <result property="code" column="code"/>
+        </association>
+    </resultMap>
+
+
+
+
+
+
+
+    <resultMap id="BaseResultMap" type="entity.Student">
+        <id column="student_id" jdbcType="INTEGER" property="studentId" />
+        <result column="name1" jdbcType="VARCHAR" property="name1" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="sex" jdbcType="TINYINT" property="sex" />
+        <result column="locked" jdbcType="TINYINT" property="locked" />
+        <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        student_id, name1, phone, email, sex, locked, gmt_created
+    </sql>
+    <select id="selectAll1" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from student
+    </select>
+    <select id="selectOne" resultMap="BaseResultMap">
+        select * from student where name1="小花"
+    </select>
+    <select id="findUserByStudentname" parameterType="java.lang.String" resultMap="BaseResultMap">
+	   select * from student where name1 like '%${value}%'
+	   </select>
+    <!-- 根据id获取用户信息 -->
+    <select id="findUserById" parameterType="Integer" resultMap="BaseResultMap">
+		select * from student where student_id = #{id}
+	</select>
+    <insert id="insertStudent" parameterType="mapper.StudentMapper">
+        insert into student( name1, phone, email, sex, locked)
+        values (
+        #{stu.name1},
+        #{stu.phone},
+        #{stu.email},
+        #{stu.sex},
+        #{stu.locked})
+    </insert>
+</mapper>

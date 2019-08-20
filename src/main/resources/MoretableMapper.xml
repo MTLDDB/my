@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.MoretableMapper">
+    <resultMap type="entity.User"
+               id="userResultMap">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="loginname" column="loginname" />
+        <result property="password" column="password" />
+        <result property="phone" column="phone" />
+        <result property="address" column="address" />
+        <!-- 一对多关联映射:collection -->
+        <!--
+               association定义关联对象的封装规则
+               select:表明当前属性是调用指定的方法查出的结果
+               column:指定将哪一列的值传给这个方法
+
+               流程：使用select指定的方法(传入column指定的这列参数的值)查出对象，并封装给property指定的属性。
+            -->
+        <collection property="orders" javaType="ArrayList"
+                    column="id" ofType="entity.Order"
+                    select="selectOrderByUserId"
+                    fetchType="lazy">
+            <id property="id" column="id" />
+            <result property="code" column="code" />
+            <result property="total" column="total" />
+        </collection>
+    </resultMap>
+
+    <select id="selectUserById" parameterType="int"
+            resultMap="userResultMap">
+        SELECT * FROM tb_user WHERE id = #{id}
+    </select>
+
+    <resultMap type="entity.Order"
+               id="orderResultMap">
+        <id property="id" column="oid" />
+        <result property="code" column="code" />
+        <result property="total" column="total" />
+        <!-- 多对一关联映射:association -->
+        <association property="user"
+                     javaType="entity.User">
+            <id property="id" column="id" />
+            <result property="username" column="username" />
+            <result property="loginname" column="loginname" />
+            <result property="password" column="password" />
+            <result property="phone" column="phone" />
+            <result property="address" column="address" />
+        </association>
+        <!-- 多对多映射的关键:collection -->
+        <collection property="articles" javaType="ArrayList"
+                    column="oid" ofType="entity.Article"
+                    select="selectArticleByOrderId"
+                    fetchType="lazy">
+            <id property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="price" column="price" />
+            <result property="remark" column="remark" />
+        </collection>
+    </resultMap>
+
+    <!-- 注意，如果查询出来的列同名，例如tb_user表的id和tb_order表的id都是id，同名，需要使用别名区分 -->
+    <select id="selectOrderById" parameterType="int"
+            resultMap="orderResultMap">
+        SELECT u.*,o.id AS oid,CODE,total,user_id
+        FROM tb_user u,tb_order o
+        WHERE u.id = o.user_id
+        AND o.id = #{id}
+    </select>
+
+    <!-- 根据userid查询订单 -->
+    <select id="selectOrderByUserId" parameterType="int"
+            resultType="entity.Order">
+        SELECT * FROM tb_order WHERE user_id = #{id}
+    </select>
+
+    <select id="selectArticleByOrderId" parameterType="int"
+            resultType="entity.Article">
+        SELECT * FROM tb_article WHERE id IN (
+        SELECT article_id FROM tb_item WHERE order_id = #{id}
+        )
+    </select>
+
+</mapper>
