@@ -16,7 +16,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 
-public class test111 {
+public class testjavapate {
     public static void main(String[] args) throws IOException, InvocationTargetException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InstantiationException, InterruptedException {
         MethodSpec function = MethodSpec.methodBuilder("function")
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)

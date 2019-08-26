@@ -1,42 +1,15 @@
-import Spider.test;
 import entity.*;
 import mapper.IpMapper;
-import mapper.MoretableMapper;
-import mapper.StudentMapper;
-import org.apache.http.*;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.BufferedHttpEntity;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicHeaderElementIterator;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-import util.ProxyIp;
 
-import javax.xml.bind.Element;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
-public class text {
+public class textHttpLogin {
     public static void main(String args[]) throws Exception {
-        text t = new text();
+        textHttpLogin t = new textHttpLogin();
         t.setUp();
     }
 
@@ -61,7 +34,7 @@ public class text {
 //                }
 
 //            StringEntity myEntity = new StringEntity("important message",
-//                    ContentType.create("text/plain", "UTF-8"));
+//                    ContentType.create("textHttpLogin/plain", "UTF-8"));
 
         // HttpEntity entity = response.getEntity();
 //            System.out.println(entity.getContentType());
