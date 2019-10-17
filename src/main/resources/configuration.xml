@@ -25,7 +25,7 @@
     </typeHandlers>
     <!-- 对象工厂 -->
     <objectFactory type="config.ExampleObjectFactory">
-          <property name="someProperty" value="100"/>
+          <!--<property name="someProperty" value="100"/>-->
     </objectFactory>
     <!-- 插件：mybatis的插件,插件可以修改mybatis的内部运行规则 -->
     <!--<plugins>
@@ -50,9 +50,10 @@
     <!--<databaseIdProvider type=""></databaseIdProvider>-->
     <!-- 映射器：指定映射文件或者映射类 -->
     <mappers>
-        <mapper resource="StudentMapper.xml"/>
+       <!-- <mapper resource="StudentMapper.xml"/>-->
         <mapper resource="IpMapper.xml"/>
-        <mapper resource="MoretableMapper.xml"/>
+       <!-- <mapper resource="MoretableMapper.xml"/>-->
+        <mapper resource="DigikeyMapper.xml"/>
     </mappers>
 
 </configuration>

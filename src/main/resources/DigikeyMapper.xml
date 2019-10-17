@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.DigikeyMapper">
+    <resultMap id="ResultMap" type="entity.Category">
+        <id column="objectid" jdbcType="VARCHAR" property="objectid" />
+        <result column="url" jdbcType="VARCHAR" property="url" javaType="String" />
+    </resultMap>
+<insert id="saveCategory">
+    insert into category(objectid,first,second ,third,url,item_mum)values(
+        #{c.objectid},
+        #{c.first},
+        #{c.second},
+        #{c.third},
+        #{c.url},
+        #{c.item_mum}
+        )
+        on duplicate key update
+        first=#{c.first},
+        second =#{c.second},
+        third=#{c.third},
+        url=#{c.url},
+        item_mum=#{c.item_mum}
+</insert>
+    <select id="getUrlList" resultMap="ResultMap">
+        select url from category;
+    </select>
+</mapper>

@@ -33,23 +33,14 @@ public class test {
 
     private SqlSessionFactory sqlSessionFactory;
     public   void ma() throws IOException {
-
-        //@Autowired
-        //mybatis配置文件
         String resource = "configuration.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
-        //使用SqlSessionFactoryBuilder创建sessionFactory
         sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        //获取session
         SqlSession session = sqlSessionFactory.openSession(true);//ture为自动提交事务
-        //或者可以用session.commit（）；
-        //获取mapper接口的代理对象
         IpMapper ipMapper = session.getMapper(IpMapper.class);//返回mapper接口的代理对象，
-        // 该对象关联了SqlSession对象，
-        // 开发者可以通过该对象直接调用方法操作数据库，参数type是Mapper的接口类型。
         CloseableHttpClient client= HttpClients.createDefault();
         List<IP> lists =new ArrayList<IP>();
-        String uri="https://www.xicidaili.com/nn/";
+        String uri="https://www.xicidaili.com/nt/";
         HttpGet httpget=new HttpGet(uri);
         RequestConfig defaultRequetConfig =RequestConfig
                 .custom()
@@ -73,8 +64,8 @@ public class test {
             IP i=new IP();
             i.setIp(tr.child(1).text());
             i.setPort(tr.child(2).text());
-            Enumhttp http=Enumhttp.valueOf(tr.child(5).text());
-            i.setHttp(http);
+            //Enumhttp http=Enumhttp.valueOf(tr.child(5).text());
+            i.setHttp(tr.child(5).text());
             list.add(i);
         }
         System.out.println(list.size());

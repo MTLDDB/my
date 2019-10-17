@@ -1,3 +1,5 @@
+import Spider.Digikey;
+import Spider.test;
 import entity.*;
 import mapper.IpMapper;
 import org.apache.ibatis.io.Resources;
@@ -97,29 +99,30 @@ public class textHttpLogin {
 
 
         //            //mybatis配置文件
-        String resource = "configuration.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        //使用SqlSessionFactoryBuilder创建sessionFactory
-        sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        //获取session
-        SqlSession session = sqlSessionFactory.openSession(true);//ture为自动提交事务
-        //或者可以用session.commit（）；
-        //获取mapper接口的代理对象
-        IpMapper ipMapper = session.getMapper(IpMapper.class);
-        //test t=new test();
-        // t.ma();
-
-            IP ip=new IP();
-            ip.setIp("7777777777");
-            ip.setPort("port");
-            ip.setHttp(Enumhttp.HTTPS);
-            ipMapper.insertIp(ip);
-            IP ip1=new IP();
-            ip1.setPort("89899");
-            ip1.setIp("7777777777");
-            ipMapper.update(ip1);
-            IP ip2=ipMapper.selectOne(ip.getIp());
-            System.out.println(ip2.getPort());
+//        String resource = "configuration.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        //使用SqlSessionFactoryBuilder创建sessionFactory
+//        sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        //获取session
+//        SqlSession session = sqlSessionFactory.openSession(true);//ture为自动提交事务
+//        //或者可以用session.commit（）；
+//        //获取mapper接口的代理对象
+//        IpMapper ipMapper = session.getMapper(IpMapper.class);
+//        test t=new test();
+//         t.ma();
+            Digikey digikey=new Digikey();
+            digikey.fetch();
+//            IP ip=new IP();
+//            ip.setIp("7777777777");
+//            ip.setPort("port");
+//            ip.setHttp(Enumhttp.HTTPS);
+//            ipMapper.insertIp(ip);
+//            IP ip1=new IP();
+//            ip1.setPort("89899");
+//            ip1.setIp("7777777777");
+//            ipMapper.update(ip1);
+//            IP ip2=ipMapper.selectOne(ip.getIp());
+//            System.out.println(ip2.getPort());
 
 //        StudentMapper studentMapper = session.getMapper(StudentMapper.class);
 //        List<Student> stu = studentMapper.selectStudent();
@@ -147,6 +150,6 @@ public class textHttpLogin {
 //        MoretableMapper moretableMapper=session.getMapper(MoretableMapper.class);
 //        User user=moretableMapper.selectUserById(1);
 //        System.out.println(user.getUsername());
-        session.close();
+       // session.close();
     }
 }

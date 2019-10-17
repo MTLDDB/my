@@ -4,13 +4,13 @@ package entity;
 public class IP {
     public  String  ip;
     public  String port;
-    public  Enumhttp http;
+    public  String http;
 
-    public Enumhttp getHttp() {
+    public String getHttp() {
         return http;
     }
 
-    public void setHttp(Enumhttp http) {
+    public void setHttp(String http) {
         this.http = http;
     }
 
