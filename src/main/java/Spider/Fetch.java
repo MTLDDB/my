@@ -62,6 +62,7 @@ public class Fetch {
                    if (client == null) {
                        client = HttpClients.createDefault();
                    }
+
                    HttpGet httpget = new HttpGet(url);
                    httpget.setHeader("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36");
                    httpget.setHeader("Origin", " https://www.digikey.com");
