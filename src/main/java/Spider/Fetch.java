@@ -69,6 +69,7 @@ public class Fetch {
                    httpget.setConfig(defaultRequestConfig);
                    response = client.execute(httpget);
                }
+
                //String uri="https://www.digikey.com/products/en";
                HttpEntity entity=response.getEntity();
                String content= EntityUtils.toString(entity,"utf8");
