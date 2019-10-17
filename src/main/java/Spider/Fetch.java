@@ -22,6 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Fetch {
    private static CloseableHttpClient client=null;
     Document document;
+
    public Document getcontent(String url) throws IOException {
 //       File file=new File("C:\\Users\\PC\\Desktop\\ip.txt");
 //       BufferedReader bufferedReader =new BufferedReader(new FileReader(file));
