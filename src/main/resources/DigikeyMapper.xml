@@ -4,9 +4,12 @@
     <resultMap id="ResultMap" type="entity.Category">
         <id column="objectid" jdbcType="VARCHAR" property="objectid" />
         <result column="url" jdbcType="VARCHAR" property="url" javaType="String" />
+        <result column="second" jdbcType="VARCHAR" property="second" javaType="String" />
+        <result column="third" jdbcType="VARCHAR" property="third" javaType="String" />
+        <result column="first" jdbcType="VARCHAR" property="first" javaType="String" />
     </resultMap>
 <insert id="saveCategory">
-    insert into category(objectid,first,second ,third,url,item_mum)values(
+    insert into tt_category_new(objectid,first,second ,third,url,item_mum)values(
         #{c.objectid},
         #{c.first},
         #{c.second},
@@ -22,6 +25,10 @@
         item_mum=#{c.item_mum}
 </insert>
     <select id="getUrlList" resultMap="ResultMap">
-        select url from category;
+        select first,url,second,third from tt_category_new;
     </select>
+
+    <!--<select id="getMfr" resultMap="">-->
+        <!--select * from tt_detailedinfo where mfr =#{mfr}-->
+    <!--</select>-->
 </mapper>

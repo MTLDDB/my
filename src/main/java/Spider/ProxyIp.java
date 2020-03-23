@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProxyIp {
-    public List<Ip> getIp(int num) throws IOException {
+    public static List<Ip> ipList=new ArrayList<>();
+    public static List<Ip> getIp(int num) throws IOException {
         String url = "http://webapi.http.zhimacangku.com/getip?num="+ num +"&type=2&yys=0&port=11&time=1&ts=1&lb=1&sb=0&pb=45&mr=1";
         CloseableHttpClient client=HttpClients.createDefault();
         HttpGet httpGet=new HttpGet(url);
@@ -46,6 +47,7 @@ public class ProxyIp {
 
             }
         }
+        ipList.addAll(addIpList);
         return addIpList;
     }
 }

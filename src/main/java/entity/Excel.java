@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Update;
 
 public class Excel {
     private String url;
-    private String domain="digikey.com";
+    private String domain="";
     private int priority=0;
     private int stockUpdate=0;
     private int filterUpdate=0;

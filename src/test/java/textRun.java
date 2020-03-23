@@ -1,23 +1,47 @@
-import Spider.Digikey;
-import Spider.test;
-import entity.*;
-import mapper.IpMapper;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
+import Spider.*;
+import Spider.avnet.Avnet;
+import Spider.avnet.SaveAvnet;
+import Spider.digikey.Digikey;
+import Spider.mouser.Mouser;
+import Spider.mouser.Next;
+import Spider.mouser.Parser;
+import Spider.verical.Verical;
+import com.alibaba.fastjson.JSONObject;
+import entity.Category;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import java.io.InputStream;
-
-public class textHttpLogin {
+public class textRun {
     public static void main(String args[]) throws Exception {
-        textHttpLogin t = new textHttpLogin();
+        textRun t = new textRun();
         t.setUp();
     }
 
     private SqlSessionFactory sqlSessionFactory;
 
     public void setUp() throws Exception {
+        ProxyIp.getIp(4);
+        //Digikey digikey=new Digikey();
+       // digikey.fetch();
+//        Next.start();
+//        Parser.start();
+
+        Mouser mouser=new Mouser();//未完成
+        mouser.fetch();
+        //Verical verical=new Verical();
+        //verical.fetch();
+
+
+//        Avnet avnet=new Avnet();
+//        avnet.fetch();
+
+
+//        SaveVerical saveAvnet=new SaveVerical();
+//        String test="{\"first\":\"Logic & Timing\",\"five\":\"\",\"four\":\"OCXO - Oven Controlled Crystal Oscillators\",\"item_mum\":\"11\",\"objectid\":\"cb47e040916a3f9da23e78c9839c3f4c\",\"second\":\"Oscillators\",\"third\":\"Controlled Oscillators\",\"url\":\"https://www.avnet.com/shop/apac/c/logic-timing/oscillators/controlled-oscillators/ocxo-oven-controlled-crystal-oscillators/\"}";
+//        Category c= JSONObject.parseObject(test,Category.class);
+//        saveAvnet.save(c);
+
+
+
 //            ProxyIp ip=new ProxyIp();
 //            CloseableHttpResponse response=ip.getProxyRes("https://www.xicidaili.com/","171.212.91.173",61234,"HTTP");
         //System.out.println(response);
@@ -36,7 +60,7 @@ public class textHttpLogin {
 //                }
 
 //            StringEntity myEntity = new StringEntity("important message",
-//                    ContentType.create("textHttpLogin/plain", "UTF-8"));
+//                    ContentType.create("textRun/plain", "UTF-8"));
 
         // HttpEntity entity = response.getEntity();
 //            System.out.println(entity.getContentType());
@@ -110,8 +134,6 @@ public class textHttpLogin {
 //        IpMapper ipMapper = session.getMapper(IpMapper.class);
 //        test t=new test();
 //         t.ma();
-            Digikey digikey=new Digikey();
-            digikey.fetch();
 //            IP ip=new IP();
 //            ip.setIp("7777777777");
 //            ip.setPort("port");

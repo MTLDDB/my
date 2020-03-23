@@ -2,9 +2,11 @@ package entity;
 
 public class Category {
     private String objectid;
-    private String first;
-    private String second;
-    private String third;
+    private String first="";
+    private String second="";
+    private String third="";
+    private String four="";
+    private String five="";
     private String url;
     private String item_mum;
 
@@ -32,12 +34,28 @@ public class Category {
         this.second = second;
     }
 
-    public String getThred() {
+    public String getThird() {
         return third;
     }
 
-    public void setThred(String third) {
+    public void setThird(String third) {
         this.third = third;
+    }
+
+    public String getFive() {
+        return five;
+    }
+
+    public void setFive(String five) {
+        this.five = five;
+    }
+
+    public String getFour() {
+        return four;
+    }
+
+    public void setFour(String four) {
+        this.four = four;
     }
 
     public String getUrl() {

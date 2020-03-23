@@ -54,6 +54,9 @@
         <mapper resource="IpMapper.xml"/>
        <!-- <mapper resource="MoretableMapper.xml"/>-->
         <mapper resource="DigikeyMapper.xml"/>
+        <mapper resource="MouserMapper.xml"/>
+        <mapper resource="AvnetMapper.xml"/>
+        <mapper resource="VericalMapper.xml"/>
     </mappers>
 
 </configuration>

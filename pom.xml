@@ -46,13 +46,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.51</version>
         </dependency>
-        <!--数据库 mysql 驱动-->
+        <!--数据库连接依赖-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.0.6</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/lib/mysql-connector-java-5.0.6-bin.jar</systemPath>
+            <version>5.0.7</version>
         </dependency>
         <!-- 实现slf4j接口并整合 -->
         <dependency>
@@ -85,6 +83,11 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <version>5.3.1</version>
         </dependency>
         <!-- 无头浏览器 -->
        <!-- <dependency>

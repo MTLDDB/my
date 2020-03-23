@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.VericalMapper">
+    <resultMap id="ResultMap" type="entity.Category">
+        <id column="objectid" jdbcType="VARCHAR" property="objectid"/>
+        <result column="url" jdbcType="VARCHAR" property="url" javaType="String"/>
+        <result column="second" jdbcType="VARCHAR" property="second" javaType="String"/>
+        <result column="third" jdbcType="VARCHAR" property="third" javaType="String"/>
+        <result column="first" jdbcType="VARCHAR" property="first" javaType="String"/>
+        <result column="four" jdbcType="VARCHAR" property="four" javaType="String"/>
+        <result column="five" jdbcType="VARCHAR" property="five" javaType="String"/>
+    </resultMap>
+    <insert id="saveCategory">
+    insert into tt_category_verical(objectid,first,second,third,four,five,url,item_mum)values(
+        #{c.objectid},
+        #{c.first},
+        #{c.second},
+        #{c.third},
+        #{c.four},
+        #{c.five},
+        #{c.url},
+        #{c.item_mum}
+        )
+        on duplicate key update
+        first=#{c.first},
+        second =#{c.second},
+        third=#{c.third},
+        four=#{c.four},
+        five=#{c.five},
+        url=#{c.url},
+        item_mum=#{c.item_mum}
+</insert>
+    <select id="getUrlList" resultMap="ResultMap">
+        select first,url,second,third,four,five from tt_category_verical;
+    </select>
+</mapper>

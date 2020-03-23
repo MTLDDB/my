@@ -1,5 +1,6 @@
-package Spider;
+package Spider.digikey;
 
+import Spider.Fetch;
 import com.alibaba.fastjson.JSON;
 import entity.Category;
 import mapper.DigikeyMapper;
@@ -40,6 +41,7 @@ public class Digikey {
         Element div=null;
         while (div==null||document==null) {
             document = fetch.getcontent(uri);
+            System.out.println(document);
             div=document.getElementById("productIndexList");
         }
         Elements h2=div.select(".catfiltertopitem");
@@ -62,7 +64,7 @@ public class Digikey {
                         String url="https://www.digikey.com"+a.attr("href");
                         String item=third.ownText();
                         category.setSecond(second);
-                        category.setThred(thirdString);
+                        category.setThird(thirdString);
                         category.setItem_mum(item);
                         category.setUrl(url);
                         category.setObjectid(UUID.nameUUIDFromBytes(url.getBytes()).toString().replace("-",""));
@@ -125,7 +127,7 @@ public class Digikey {
                                         String url3 = "https://www.digikey.com" + a.attr("href");
                                         category.setFirst(first);
                                         category.setSecond(second2);
-                                        category.setThred(thirdString3);
+                                        category.setThird(thirdString3);
                                         category.setItem_mum(itemreal);
                                         category.setUrl(url3);
                                         category.setObjectid(UUID.nameUUIDFromBytes(url3.getBytes()).toString().replace("-", ""));
@@ -143,7 +145,7 @@ public class Digikey {
                                     String item = li4.ownText();
                                     category.setFirst(first);
                                     category.setSecond(second2);
-                                    category.setThred(thirdString3);
+                                    category.setThird(thirdString3);
                                     category.setItem_mum(item);
                                     category.setUrl(url4);
                                     category.setObjectid(UUID.nameUUIDFromBytes(url4.getBytes()).toString().replace("-", ""));
@@ -157,6 +159,7 @@ public class Digikey {
                 }
             }
         }
+        System.out.println("done");
     }
 
 }
