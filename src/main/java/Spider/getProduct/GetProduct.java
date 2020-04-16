@@ -60,7 +60,22 @@ public  void getProduct_db(){
         }
         getExcel("Taiyo_Yuden",products);
     }
+    public  void getProduct_db_db(){
 
+        digikeyMapper= Session.getMapper(DigikeyMapper.class);
+        List<Detailedinfo> productList = digikeyMapper.getMfr("Renesas Electronics America Inc");
+        List<Detailedinfo> products=new ArrayList<>();
+        int i=0;
+//        for(Detailedinfo p:productList){
+//            System.out.println("以获取"+ ++i+ "条");
+//            String price=digikeyMapper.getPrice(p.getObjectid());
+//            String attr=digikeyMapper.getAttr(p.getObjectid());
+//            p.setAttr_json(attr);
+//            p.setPrice_json(price);
+//            products.add(p);
+//        }
+        getExcel("Renesas_Electronics_America_Inc",products);
+    }
     public static void getExcel(String excelName, List<Detailedinfo> list) {
 
         HSSFWorkbook wb = new HSSFWorkbook();
@@ -101,7 +116,7 @@ public  void getProduct_db(){
         }
         // 第六步，将文件存到指定位置
         try {
-            FileOutputStream fout = new FileOutputStream("C:\\Users\\PC\\Desktop\\taiyo\\" + excelName + ".xls");
+            FileOutputStream fout = new FileOutputStream("C:\\Users\\PC\\Desktop\\Renesas_Electronics_America_Inc\\" + excelName + ".xls");
             wb.write(fout);
             fout.close();
         } catch (Exception e) {
